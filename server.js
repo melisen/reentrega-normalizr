@@ -107,25 +107,19 @@ app.get('/api/productos-test', async (req, res)=>{
 //NORMALIZACION
 function normlizarChat(data){
             //esquemas para normalizacion
-            const emailSchema = new schema.Entity('emails');
-
-        const textSchema = new schema.Entity('text');
-        const authorSchema = new schema.Entity('authors', {idAttribute: emailSchema })
-    
-          const mensajeSchema = new schema.Entity('mensajes', 
-            {author:authorSchema,
-            text:textSchema,
-            idAttribute:"id"}
-          );
-
+            const authorSchema = new schema.Entity('authors', { idAttribute: 'id' });
+            const messageSchema = new schema.Entity('message', 
+            { author: authorSchema }, 
+            { idAttribute: "id" })
             
-
+/*
  const dataMap = data.map((item)=>({
     author:item.author,
     text: item.text,
     _id: item["_id"]
  }))
- const dataNormalizada = normalize(dataMap,mensajeSchema)
+ */
+ const dataNormalizada = normalize(data, messageSchema)
  return dataNormalizada
 }
 

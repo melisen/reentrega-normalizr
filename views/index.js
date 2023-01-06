@@ -84,7 +84,8 @@ function enviarMensaje(event){
     if(email){
         socket.emit('new_msg', {
             author:{
-                email: email,
+                email:email,
+                idAttribute: email,
                 nombre: nombre, 
                 apellido: apellido,
                 edad: edad,
